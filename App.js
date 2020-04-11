@@ -6,9 +6,8 @@ import {
   TextInput,
   Dimensions,
   Button,
-  FlatList,
+  StatusBar,
 } from "react-native";
-import SpinnerButton from "react-native-spinner-button";
 
 const { width } = Dimensions.get("window");
 
@@ -16,7 +15,6 @@ export default class App extends Component {
   state = {
     Todo: "",
     Todos: [],
-    defaultLoading: false
   };
 
   handleChange = (event) => {
@@ -37,6 +35,9 @@ export default class App extends Component {
   render() {
     return (
       <Fragment>
+        <StatusBar     
+         hidden = {true}    
+        />
         <View style={styles.container}>
           <Text style={styles.text}>React Native Todo App</Text>
         </View>
@@ -47,10 +48,11 @@ export default class App extends Component {
             onChange={this.handleChange}
             value={this.state.Todo}
           />
-          <Button onPress={this.addTodo}>Add Todo</Button>
+          <Button onPress={this.addTodo} color="purple"  title="Add Todo" />
+
           <Text>
             {this.state.Todos.map((item) => (
-              <Text style={{ fontSize: 20 }}>
+              <Text style={{ fontSize: 20, textAlign: "center" }}>
                 {item} <Text onPress={() => this.delete(item)}>❌</Text> {"\n"}
               </Text>
             ))}
@@ -64,20 +66,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 2,
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "space-around",
+    backgroundColor: "turquoise",
+    borderBottomLeftRadius: 35,
+    borderBottomRightRadius: 35,
+    width,
   },
   text: {
     fontSize: 35,
-    marginTop: 20,
+    color: "purple",
   },
   input: {
     width,
     fontSize: 20,
     textAlign: "center",
+    marginTop: 60,
   },
   inputField: {
-    flex: 5,
-    alignItems: "center",
-    justifyContent: "flex-start",
+    flex: 2.5,
   },
 });
